@@ -1,0 +1,17 @@
+package com.aurionpro.GuitarApp.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GuitarList {
+	List<Guitar> guitarData;
+
+	public GuitarList() {
+		guitarData = new ArrayList<>();
+	}
+
+	public List<Guitar> getGuitarData() {
+		return guitarData;
+	}
+
+}

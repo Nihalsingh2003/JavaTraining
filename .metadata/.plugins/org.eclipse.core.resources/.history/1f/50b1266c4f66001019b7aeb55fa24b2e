@@ -1,0 +1,116 @@
+package com.aurionpro.Game.model;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class TicTacToeFacade {
+	private Player player1;
+	private Player player2;
+	private Player currentPlayer;
+	private Board board;
+	private GameEngine gameEngine;
+	private boolean gameOver;
+
+	public TicTacToeFacade() {
+		board = new Board();
+		gameEngine = new GameEngine(board);
+		gameOver = false;
+	}
+
+	public void startGame() {
+		Scanner scanner = new Scanner(System.in);
+
+		try {
+			// Player setup
+			System.out.println("Welcome to Tic Tac Toe!");
+			System.out.print("Player 1, enter your name: ");
+			String name1 = scanner.nextLine();
+			player1 = new Player(name1, 'X');
+
+			System.out.print("Player 2, enter your name: ");
+			String name2 = scanner.nextLine();
+			player2 = new Player(name2, 'O');
+
+			currentPlayer = player1;
+			board.displayBoard();
+
+			// Game loop
+			while (!gameOver) {
+				System.out.println(currentPlayer.getName() + "'s (" + currentPlayer.getSymbol() + ") turn.");
+				int row = 0, col = 0;
+
+				boolean validMove = false;
+
+				while (!validMove) {
+					try {
+						System.out.print("Enter row (0-2): ");
+						row = scanner.nextInt();
+
+						System.out.print("Enter column (0-2): ");
+						col = scanner.nextInt();
+
+						// Check bounds
+						if (row < 1 || row > 3 || col < 1 || col > 3) {
+							System.out.println("Row and column must be between 1 and 3.");
+							continue;
+						}
+
+						// Check if cell is empty
+						if (!board.isCellEmpty(row, col)) {
+							System.out.println(" That cell is already occupied. Try again.");
+							continue;
+						}
+
+						// Move is valid, proceed
+						validMove = true;
+						playTurn(currentPlayer, row, col);
+
+					} catch (InputMismatchException e) {
+						System.out.println("Unexpected error: " + e);
+					}
+				}
+			}
+
+		} catch (InputMismatchException e) {
+			System.out.println("Game error: " + e);
+		}
+		if (gameOver) {
+			System.out.print("Do you want to play again?: ");
+			System.out.println("1.yes");
+			System.out.println("2.No");
+			int userInput = scanner.nextInt();
+			switch (userInput) {
+			case 1:
+				startGame();
+				break;
+			case 2:
+				return;
+			}
+
+		}
+	}
+
+	public void playTurn(Player player, int row, int col) {
+		board.placeSymbol(row, col, player.getSymbol());
+		board.displayBoard();
+
+		if (gameEngine.isWinningMove(row, col, player.getSymbol())) {
+			System.out.println("🎉 Result: " + player.getName() + " wins!");
+			gameOver = true;
+			return;
+		}
+
+		if (board.isFull()) {
+			System.out.println("Result: It's a draw!");
+			gameOver = true;
+			return;
+		}
+
+		switchPlayer();
+	}
+
+	private void switchPlayer() {
+		currentPlayer = (currentPlayer == player1) ? player2 : player1;
+	}
+
+}

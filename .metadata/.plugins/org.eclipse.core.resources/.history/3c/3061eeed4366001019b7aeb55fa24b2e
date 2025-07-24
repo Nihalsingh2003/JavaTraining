@@ -1,0 +1,15 @@
+package com.aurionpro.Game.model;
+
+public class Player {
+	private String name;
+	private char symbol;
+
+	public String getName() {
+		return name;
+	}
+
+	public char getSymbol() {
+		return symbol;
+	}
+
+}

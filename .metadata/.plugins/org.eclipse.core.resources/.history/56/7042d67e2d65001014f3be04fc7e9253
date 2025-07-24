@@ -1,0 +1,35 @@
+package com.aurionpro.GuitarApp.model;
+
+import java.util.List;
+
+public class Search {
+
+	public List<Guitar> search(GuitarList list, GuitarSpec specs) {
+		return list.getGuitarData().stream().filter(guitar -> match(guitar.getSpec(), specs)).toList();
+
+	}
+
+	public static boolean match(GuitarSpec guitarSpecs, GuitarSpec specs) {
+		if (guitarSpecs == null || specs == null)
+			return false;
+
+		if (specs.getModel() != null && !specs.getModel().equalsIgnoreCase(guitarSpecs.getModel())) {
+			return false;
+		}
+		if (specs.getBuilder() != null && specs.getBuilder() != guitarSpecs.getBuilder()) {
+			return false;
+		}
+		if (specs.getType() != null && specs.getType() != guitarSpecs.getType()) {
+			return false;
+		}
+		if (specs.getBackWood() != null && specs.getBackWood() != guitarSpecs.getBackWood()) {
+			return false;
+		}
+		if (specs.getTopWood() != null && specs.getTopWood() != guitarSpecs.getTopWood()) {
+			return false;
+		}
+
+		return true;
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.aurionpro.GuitarApp.model;
+
+public enum Builder {
+BUILDER,MODEL,TYPE,BACKWOOD,TOPWOOD;
+}

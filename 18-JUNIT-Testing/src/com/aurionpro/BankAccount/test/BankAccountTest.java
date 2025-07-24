@@ -1,0 +1,49 @@
+package com.aurionpro.BankAccount.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+import com.aurionpro.BankAccount.model.BankAccount;
+
+public class BankAccountTest {
+	private BankAccount bank;
+
+	@BeforeEach
+	void createAccount() {
+		bank = new BankAccount(100.0);
+	}
+
+	@DisplayName("All Deposit Test")
+	@Nested
+	class DepositTests {
+
+		@Test
+		void testValidDeposit() {
+			bank.deposit(50.0);
+			assertEquals(150.0, bank.getBalance());
+		}
+	}
+
+	@DisplayName("All Withdraw Test")
+	@Nested
+	class WithdrawTests {
+
+		@Test
+		void testValidWithdraw() {
+			bank.withDraw(40.0);
+			assertEquals(60.0, bank.getBalance());
+		}
+
+		@Test
+		void testOverDraft() {
+			assertThrows(IllegalArgumentException.class, () -> {
+				bank.withDraw(200.0);
+			});
+		}
+	}
+}

@@ -1,0 +1,204 @@
+package com.aurionpro.GuitarApp.Test;
+
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+
+import com.aurionpro.GuitarApp.model.Builder;
+import com.aurionpro.GuitarApp.model.Guitar;
+import com.aurionpro.GuitarApp.model.GuitarList;
+import com.aurionpro.GuitarApp.model.GuitarSpec;
+import com.aurionpro.GuitarApp.model.Search;
+import com.aurionpro.GuitarApp.model.Type;
+import com.aurionpro.GuitarApp.model.Wood;
+
+public class GuitarTest {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		GuitarList list = new GuitarList();
+		while (true) {
+			try {
+				System.out.println("Choice one Operation:");
+				System.out.println("1.AddGuitar");
+				System.out.println("2.ShowAllGuitar");
+				System.out.println("3.GetSpecificGuitar");
+				System.out.println("4.Search Guitar by Specifications");
+				System.out.println("5.Exit");
+				int userInput = scanner.nextInt();
+				scanner.nextLine();
+				switch (userInput) {
+				case 1:
+					String serialNumber;
+					while (true) {
+						System.out.println("Enter the Guiter SerialNumber:");
+						serialNumber = scanner.nextLine();
+						boolean isPresent = false;
+						for (Guitar guitar : list.getGuitarData()) {
+							if (guitar.getSerialNumber().equals(serialNumber)) {
+								isPresent = true;
+							}
+						}
+						if (isPresent) {
+							System.out.println("A Guitar with serialNumber Already Present!");
+							continue;
+						} else {
+							break;
+						}
+					}
+
+					// price
+
+					double price = 0;
+					while (true) {
+						try {
+							System.out.println("Enter the Guitar Price:");
+							price = scanner.nextDouble();
+							if (price <= 0) {
+								System.out.println("Please Enter price greater than 0!");
+								continue;
+							}
+							break;
+						} catch (InputMismatchException e) {
+							System.out.println("Invalid price input! Please enter a valid number.");
+							scanner.nextLine();
+						}
+					}
+					scanner.nextLine();
+					// Model
+					System.out.println("Enter the GuitarModel:");
+					String guiterModel = scanner.nextLine();
+
+					Builder builderType = getEnum(scanner, "Enter the Guitar Builder Type:", Builder.values());
+
+					Type guiterType = getEnum(scanner, "Enter the Guitar Type", Type.values());
+
+					Wood topWood = getEnum(scanner, "Enter the Guitar TopWood Type", Wood.values());
+
+					Wood backWood = getEnum(scanner, "Enter the Guitar BackWood Type", Wood.values());
+
+					GuitarSpec guitarSpec = new GuitarSpec(builderType, guiterModel, guiterType, backWood, topWood);
+					list.addGuitar(new Guitar(serialNumber, price, guitarSpec));
+
+					break;
+				case 2:
+					if (list.getGuitarData().isEmpty()) {
+						System.out.println("No guitars available. Please enter guitar data first!");
+						break;
+					}
+					List<Guitar> data = list.getGuitarData();
+					for (Guitar result : data) {
+						System.out.println(result);
+					}
+					break;
+				case 3:
+					if (list.getGuitarData().isEmpty()) {
+						System.out.println("No guitars available. Please enter guitar data first!");
+
+						break;
+					} else {
+						System.out.println("Enter the Guitar SerialNumber:");
+						serialNumber = scanner.nextLine();
+
+						List<Guitar> newList = list.getGuitarData(serialNumber);
+						if (newList.isEmpty()) {
+							System.out.println("No guitars found matching the SerialNumber");
+							break;
+						} else {
+							System.out.println(newList);
+						}
+					}
+
+					break;
+				case 4:
+					if (list.getGuitarData().isEmpty()) {
+						System.out.println("No guitars available to search.");
+						break;
+					}
+
+					System.out.println("Enter search criteria :");
+
+					// Model
+					System.out.println("Enter the Guitar Model:");
+					String searchModel = scanner.nextLine().trim();
+					searchModel = searchModel.isEmpty() ? null : searchModel;
+
+					// Builder
+					Builder searchBuilder = getEnum(scanner, "Select Builder Type :", Builder.values());
+
+					// Type
+					Type searchType = getEnum(scanner, "Select Guitar Type :", Type.values());
+
+					// TopWood
+					Wood searchTopWood = getEnum(scanner, "Select Top Wood :", Wood.values());
+
+					// BackWood
+					Wood searchBackWood = getEnum(scanner, "Select Back Wood :", Wood.values());
+
+					GuitarSpec searchSpec = new GuitarSpec(searchBuilder, searchModel, searchType, searchBackWood,
+							searchTopWood);
+					Search search = new Search();
+					List<Guitar> results = search.search(list, searchSpec);
+
+					if (results.isEmpty()) {
+						System.out.println("No guitars found matching the criteria.");
+					} else {
+						System.out.println("You might like these guitars:");
+
+						for (Guitar guitar : results) {
+							GuitarSpec spec = guitar.getSpec();
+
+							System.out.println(" We have a " + spec.getBuilder() + " " + spec.getModel() + " "
+									+ spec.getType() + " guitar:" + "     " + spec.getBackWood() + " back and sides,"
+									+ "     " + spec.getTopWood() + " top." + " You can have it for only $"
+									+ guitar.getPrice() + "!" + "-----");
+						}
+					}
+					break;
+				case 5:
+					System.out.println("Thank you for using the Guitar App! Bye 👋");
+					scanner.close();
+					System.exit(0);
+				default:
+					System.out.println("Invalid choice! Please enter a number between 1 and 5.");
+					break;
+
+				}
+
+			} catch (InputMismatchException e) {
+				System.out.println("Please enter only valid integer :" + e);
+				scanner.next();
+			}
+
+		}
+	}
+
+	public static <E extends Enum<E>> E getEnum(Scanner scanner, String prompt, E[] enumValues) {
+		E choice = null;
+		int userChoice;
+		while (true) {
+			System.out.println(prompt);
+
+			for (E type : enumValues) {
+				System.out.println((type.ordinal() + 1) + "." + type);
+
+			}
+			try {
+				userChoice = scanner.nextInt();
+
+				if (userChoice >= 1 && userChoice <= enumValues.length) {
+					choice = enumValues[userChoice - 1];
+					break;
+				} else {
+					System.out.println("Invalid option! Please select a valid option.");
+					continue;
+				}
+			} catch (InputMismatchException e) {
+
+				System.out.println("Invalid input! Please enter a valid integer.");
+				scanner.nextLine();
+			}
+		}
+		return choice;
+	}
+
+}

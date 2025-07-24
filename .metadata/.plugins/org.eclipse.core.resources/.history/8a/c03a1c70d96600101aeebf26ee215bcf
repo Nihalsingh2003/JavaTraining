@@ -1,0 +1,19 @@
+package com.aurionpro.Game.Test;
+
+import com.aurionpro.Game.model.TicTacToeFacade;
+
+public class TicTacToeFacadeTest {
+	public static void main(String[] args) {
+		TicTacToeFacade ticTacToeFacade = new TicTacToeFacade();
+		System.out.println();
+        System.out.println("    ┌───────┬───────┬───────┐");
+        System.out.println("    │  TIC  │   X   │   O   │");
+        System.out.println("    ├───────┼───────┼───────┤"); //
+        System.out.println("    │   X   │  TAC  │   X   │");
+        System.out.println("    ├───────┼───────┼───────┤");
+        System.out.println("    │   O   │   X   │  TOE  │");
+        System.out.println("    └───────┴───────┴───────┘");
+        System.out.println();
+		ticTacToeFacade.startGame();
+	}
+}

@@ -1,0 +1,29 @@
+package com.aurionpro.BankAccount.test;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+
+import com.aurionpro.BankAccount.model.BankAccount;
+
+public class BankAccountTest {
+	private BankAccount bank;
+
+	@BeforeEach
+	public void createAccount() {
+		bank = new BankAccount(100.0);
+	}
+
+	@Nested
+	class DepositTests {
+
+		@Test
+		void testValidDeposit() {
+			bank.deposit(50.0);
+			assertEquals(150.0, bank.getBalance());
+		}
+	}
+
+}

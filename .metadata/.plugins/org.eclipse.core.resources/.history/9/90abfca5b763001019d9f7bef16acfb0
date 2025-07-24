@@ -1,0 +1,5 @@
+package com.aurionpro.chainof.model;
+
+public abstract class LeaveApprover {
+
+}
