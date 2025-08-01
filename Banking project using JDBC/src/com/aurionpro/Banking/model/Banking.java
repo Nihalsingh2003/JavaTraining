@@ -245,6 +245,7 @@ public class Banking {
 				boolean accountVerify = true;
 				boolean isAccountExist = false;
 				String choice = null;
+				User isUser;
 				int userId = getUserIdFromInput(scanner);
 
 				while (true) {
@@ -258,7 +259,7 @@ public class Banking {
 						System.out.println("Invalid PIN. It must be exactly 4 digits. Try again.");
 					}
 				}
-				User isUser;
+
 				try {
 					isUser = new getUserById().checkUserId(userId, userPin, connection);
 				} catch (DatabaseException e) {
@@ -308,7 +309,8 @@ public class Banking {
 						System.out.println("3. Deposit Money");
 						System.out.println("4. Withdraw Money");
 						System.out.println("5. Transaction History");
-						System.out.println("6. Exit");
+						System.out.println("6. Update profile");
+						System.out.println("7. Exit");
 						input = scanner.nextLine().trim();
 						String message;
 						switch (input) {
@@ -751,13 +753,17 @@ public class Banking {
 
 							break;
 						case "6":
+							EditProfileOption.editProfile(scanner, isUser, connection);
+							break;
+
+						case "7":
 							System.out.println("Returning to main menu...");
 							break;
 						default:
-							System.out.println("Please select a correct option (1-6).");
+							System.out.println("Please select a correct option (1-7).");
 							continue;
 						}
-						if (input.equals("6"))
+						if (input.equals("7"))
 							break;
 					}
 
