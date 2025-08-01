@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Currency Convert</title>
+</head>
+<body>
+
+	<h2>Select Currency type</h2>
+
+	<form action="CurrencyConvert" method="post">
+		<input type="number" name="amount" placeholder="Enter Amount">
+		<label for="FROM">From:</label> <select name="from" id="from">
+			<option  value=usd>USD</option>
+			<option value="inr">INR</option>
+
+		</select> <label for="to">To:</label> <select name="to" id="to">
+			<option value="usd">USD</option>
+			<option value="inr">INR</option>
+
+		</select> <br> <br> <input type="submit" value="Convert">
+	</form>
+
+</body>
+</html>
+
+

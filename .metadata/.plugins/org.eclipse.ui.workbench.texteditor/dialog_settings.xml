@@ -6,8 +6,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="specs"/>
+		<item key="selection" value="accountExist"/>
 		<list key="findhistory">
+			<item value="accountExist"/>
+			<item value="AccountExist"/>
+			<item value="CheckuserById"/>
+			<item value="CheckUserById"/>
+			<item value="getUserById"/>
 			<item value="other"/>
 			<item value="main"/>
 			<item value="p"/>
@@ -16,8 +21,9 @@
 			<item value="public void trafficSignal(TrafficSignal signal){"/>
 		</list>
 		<list key="replacehistory">
-			<item value="specs"/>
+			<item value="AccountExist"/>
 			<item value=""/>
+			<item value="specs"/>
 			<item value="result"/>
 		</list>
 	</section>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Feedback Form</title>
+</head>
+<body>
+
+    <h2>Product Feedback Form</h2>
+
+    <form action="submitFeedback" method="post">
+        <label for="productId">Product ID:</label><br>
+        <input type="text" id="productId" name="productId" required><br><br>
+
+        <label for="rating">Rating (1 to 5):</label><br>
+        <select id="rating" name="rating" required>
+            <option value="">--Select--</option>
+            <option value="1">1 - Very Poor</option>
+            <option value="2">2 - Poor</option>
+            <option value="3">3 - Fair</option>
+            <option value="4">4 - Good</option>
+            <option value="5">5 - Excellent</option>
+        </select><br><br>
+
+        <label for="review">Your Review:</label><br>
+        <textarea id="review" name="review" rows="4" cols="50" placeholder="Write your review here..." required></textarea><br><br>
+
+        <input type="submit" value="Submit Feedback">
+    </form>
+
+</body>
+</html>

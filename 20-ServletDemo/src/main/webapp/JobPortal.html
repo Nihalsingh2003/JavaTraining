@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Application Form</title>
+</head>
+<body>
+
+    <h2>Job Application Form</h2>
+
+    <form action="submitApplication" method="post">
+        <label for="name">Full Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="resume">Resume (paste text):</label><br>
+        <textarea id="resume" name="resume" rows="8" cols="50" placeholder="Paste your resume here..." required></textarea><br><br>
+
+        <label for="skills">Skills (comma-separated):</label><br>
+        <input type="text" id="skills" name="skills" placeholder="e.g. Java, Python, HTML" required><br><br>
+
+        <input type="submit" value="Submit Application">
+    </form>
+
+</body>
+</html>

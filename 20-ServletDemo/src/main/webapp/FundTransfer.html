@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fund Transfer Form</title>
+</head>
+<body>
+
+    <h2>Fund Transfer</h2>
+
+    <form action="transfer" method="post">
+        <label for="source">Source Account Number:</label><br>
+        <input type="text" id="source" name="sourceAccount" required><br><br>
+
+        <label for="destination">Destination Account Number:</label><br>
+        <input type="text" id="destination" name="destinationAccount" required><br><br>
+
+        <label for="amount">Amount to Transfer:</label><br>
+        <input type="number" id="amount" name="amount" min="1" required><br><br>
+
+        <input type="submit" value="Transfer">
+    </form>
+
+</body>
+</html>

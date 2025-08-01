@@ -1,7 +1,0 @@
-package com.aurionpro.chainof.test;
-
-public class LeaveApproverTest {
-public static void main(String[] args) {
-	
-}
-}
