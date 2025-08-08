@@ -1,27 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
-  <context-param>
-    <param-name>Company Name</param-name>
-    <param-value>Aurionpro</param-value>
-  </context-param>
-  <servlet>
-    <description>Demo servlet</description>
-    <display-name>ServletDemo</display-name>
-    <servlet-name>ServletDemo</servlet-name>
-    <servlet-class>com.aurionpro.demoservlet.ServletDemo</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ServletDemo</servlet-name>
-    <url-pattern>/ServletDemo</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Demoservlet</display-name>
-    <servlet-name>Demoservlet</servlet-name>
-    <servlet-class>com.aurionpro.demoservlet.Demoservlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Demoservlet</servlet-name>
-    <url-pattern>/Demoservlet</url-pattern>
-  </servlet-mapping>
+ 
+ <servlet>
+    <servlet-name>FictionAdmin</servlet-name>
+    <servlet-class>com.aurionpro.BookInfoDisplaySystem.AdminServlet</servlet-class>
+    <init-param>
+        <param-name>storeName</param-name>
+        <param-value>BookVerse</param-value>
+    </init-param>
+    <init-param>
+        <param-name>adminEmail</param-name>
+        <param-value>admin@bookverse.com</param-value>
+    </init-param>
+    <init-param>
+        <param-name>category</param-name>
+        <param-value>Fiction</param-value>
+    </init-param>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>FictionAdmin</servlet-name>
+    <url-pattern>/admin/fiction</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>ScienceAdmin</servlet-name>
+    <servlet-class>com.aurionpro.BookInfoDisplaySystem.AdminServlet</servlet-class>
+    <init-param>
+        <param-name>storeName</param-name>
+        <param-value>BookVerse</param-value>
+    </init-param>
+    <init-param>
+        <param-name>adminEmail</param-name>
+        <param-value>admin@bookverse.com</param-value>
+    </init-param>
+    <init-param>
+        <param-name>category</param-name>
+        <param-value>Science</param-value>
+    </init-param>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ScienceAdmin</servlet-name>
+    <url-pattern>/admin/science</url-pattern>
+</servlet-mapping>
+ 
+ <servlet>
+    <servlet-name>TechnologyAdmin</servlet-name>
+    <servlet-class>com.aurionpro.BookInfoDisplaySystem.AdminServlet</servlet-class>
+    <init-param>
+        <param-name>storeName</param-name>
+        <param-value>BookVerse</param-value>
+    </init-param>
+    <init-param>
+        <param-name>adminEmail</param-name>
+        <param-value>admin@bookverse.com</param-value>
+    </init-param>
+    <init-param>
+        <param-name>category</param-name>
+        <param-value>Technology</param-value>
+    </init-param>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>TechnologyAdmin</servlet-name>
+    <url-pattern>/admin/technology</url-pattern>
+</servlet-mapping>
+ 
+ 
+ 
 </web-app>

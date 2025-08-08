@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login Page </title>
+<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background: #f0f2f5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+
+.login-container {
+	background: white;
+	width: 360px;
+	border-radius: 8px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+}
+/* Hide radio inputs */
+input[type="radio"] {
+	display: none;
+}
+/* Centered tabs container */
+.tabs {
+	display: flex;
+	justify-content: center; /* Center horizontally */
+	background: #007bff;
+	user-select: none;
+}
+/* Tab wrapper for fixed width */
+.tab-label {
+	flex: 0 0 150px; 
+	text-align: center;
+	padding: 14px 0;
+	color: white;
+	cursor: pointer;
+	font-weight: 600;
+	transition: background 0.3s;
+	border-bottom: 3px solid transparent;
+	user-select: none;
+}
+/* Highlight active tab */
+#user-tab:checked+label[for="user-tab"], #admin-tab:checked+label[for="admin-tab"]
+	{
+	background: #0056b3;
+	border-bottom: 3px solid #ffd700;
+	font-weight: 700;
+}
+/* Hover and focus states */
+label[for="user-tab"]:hover, label[for="admin-tab"]:hover {
+	background: #0056b3;
+}
+
+label[for="user-tab"]:focus, label[for="admin-tab"]:focus {
+	outline: none;
+	box-shadow: 0 0 5px #ffd700;
+}
+/* Form container */
+.forms {
+	padding: 30px 25px;
+	background: white;
+}
+
+form {
+	display: none;
+}
+/* Show form based on checked radio */
+#user-tab:checked ~ .forms #user-form, #admin-tab:checked ~ .forms #admin-form
+	{
+	display: block;
+}
+/* Form inputs */
+label.input-label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: 600;
+	color: #333;
+}
+
+input[type="text"], input[type="password"] {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	font-size: 14px;
+	transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+	outline: none;
+	border-color: #007bff;
+}
+
+button {
+	width: 100%;
+	background: #007bff;
+	color: white;
+	border: none;
+	padding: 12px;
+	font-size: 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: 700;
+	transition: background 0.3s;
+}
+
+button:hover {
+	background: #0056b3;
+}
+</style>
+</head>
+<body>
+	<div class="login-container">
+		<!-- Radio buttons for toggling -->
+		<input type="radio" name="tab" id="user-tab" checked /> <input
+			type="radio" name="tab" id="admin-tab" />
+
+		<div class="tabs">
+			<label for="user-tab" class="tab-label">User Login</label> <label
+				for="admin-tab" class="tab-label">Admin Login</label>
+		</div>
+
+		<div class="forms">
+			<!-- User login form -->
+			<form id="user-form" action="/20-ServletDemo/userLogin" method="POST">
+				<label for="user-username" class="input-label">Username</label> <input
+					type="text" id="user-username" name="user-username" required /> <label
+					for="user-password" class="input-label">Password</label> <input
+					type="password" id="user-password" name="user-password" required />
+
+				<button type="submit">Login as User</button>
+				<div id="error-message"
+					style="color: red; text-align: center; display: none; margin-bottom: 10px;">
+					Wrong username or password</div>
+
+			</form>
+
+			<!-- Admin login form -->
+			<form id="admin-form" action="/20-ServletDemo/adminLogin" method="POST">
+				<label for="admin-username" class="input-label">Username</label> <input
+					type="text" id="admin-username" name="admin-username" required />
+
+				<label for="admin-password" class="input-label">Password</label> <input
+					type="password" id="admin-password" name="admin-password" required />
+
+				<button type="submit">Login as Admin</button>
+				<div id="error-message"
+					style="color: red; text-align: center; display: none; margin-bottom: 10px;">
+					Wrong username or password</div>
+
+			</form>
+		</div>
+	</div>
+
+	<script>
+		const params = new URLSearchParams(window.location.search);
+		if (params.get("error") === "1") {
+			document.getElementById("error-message").style.display = "block";
+		}
+	</script>
+
+</body>
+</html>

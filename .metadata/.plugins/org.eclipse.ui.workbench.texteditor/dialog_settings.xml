@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="accountExist"/>
+		<item key="selection" value="User"/>
 		<list key="findhistory">
+			<item value="User"/>
+			<item value="user"/>
 			<item value="accountExist"/>
 			<item value="AccountExist"/>
 			<item value="CheckuserById"/>
