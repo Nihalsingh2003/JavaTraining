@@ -166,11 +166,14 @@ public class AdminDiscountManger {
 
 			case "6":
 				System.out.println("Exiting admin discount manager.");
-				scanner.close();
-				return;
+				
+				break;
 
 			default:
 				System.out.println("Invalid choice. Try again.");
+			}
+			if("6".equals(choice)) {
+				break;
 			}
 		}
 	}

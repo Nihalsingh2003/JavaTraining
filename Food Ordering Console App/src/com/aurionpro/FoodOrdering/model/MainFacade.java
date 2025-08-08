@@ -3,13 +3,18 @@ package com.aurionpro.FoodOrdering.model;
 import java.util.Scanner;
 
 import com.aurionpro.FoodOrdering.model.AdminModel.AdminAddMenu;
+import com.aurionpro.FoodOrdering.model.AdminModel.AdminDeliveryManger;
 import com.aurionpro.FoodOrdering.model.AdminModel.AdminDiscountManger;
 import com.aurionpro.FoodOrdering.model.AdminModel.AdminRemoveMenu;
+import com.aurionpro.FoodOrdering.model.customermodel.CustomerOrderManager;
 
 public class MainFacade {
 
 	public void start() {
 		Scanner scanner = new Scanner(System.in);
+		// Add default delivery partners
+		DeliveryPartnerManager manager = new DeliveryPartnerManager();
+		addDefaultPartners(manager);
 
 		while (true) {
 			System.out.println("Welcome to the Food Ordering System!");
@@ -75,6 +80,7 @@ public class MainFacade {
 						break;
 					case "3":
 						System.out.println("You chose Manage Delivery Agent.");
+						AdminDeliveryManger.adminDeliveryManger(manager);
 
 						break;
 					case "4":
@@ -92,6 +98,7 @@ public class MainFacade {
 				break;
 			case "2":
 				System.out.println(" You selected Customer.");
+				CustomerOrderManager.startCustomerFlow(manager);
 
 				break;
 			case "3":
@@ -103,5 +110,14 @@ public class MainFacade {
 
 			System.out.println();
 		}
+
+	}
+
+	private static void addDefaultPartners(DeliveryPartnerManager manager) {
+		DeliveryPartner partner1 = new DeliveryPartner(1, "Alice", "9876543210");
+		DeliveryPartner partner2 = new DeliveryPartner(2, "Bob", "9123456789");
+
+		manager.addDeliveryPartner(partner1);
+		manager.addDeliveryPartner(partner2);
 	}
 }
